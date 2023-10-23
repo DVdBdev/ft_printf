@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dvan-den <dvan-den@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/24 00:01:18 by dvan-den          #+#    #+#             */
+/*   Updated: 2023/10/24 00:01:25 by dvan-den         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static int	printf_formats(va_list args, const char format)
@@ -21,15 +33,14 @@ static int	printf_formats(va_list args, const char format)
 		len = len + printf_hex_upper(va_arg(args, unsigned int));
 	else if (format == 'p')
 		len = len + printf_pointer(va_arg(args, void *));
-	
 	return (len);
 }
 
 int	ft_printf(const char *str, ...)
 {
-	int	i;
+	int		i;
 	va_list	args;
-	int	len;
+	int		len;
 
 	i = 0;
 	len = 0;
@@ -48,18 +59,3 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (len);
 }
-
-/*int main(void) {
-	int *ptr;
-	char *test = "this is a test:";
-	int c = 'c';
-	int i = INT_MIN;
-	int d = INT_MAX;
-	unsigned int u = UINT_MAX;
-
-    int a = ft_printf("%s %p %c %% %d %i %u %x %X\n", test, ptr, c, d, i, u, i, d);
-	int b = printf("%s %p %c %% %d %i %u %x %X\n", test, ptr, c, d, i, u, i, d);
-	printf("ft_printf:\t%d\nprintf:\t\t%d\n", a, b);
-
-    return (0);
-}*/

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   printf_unsigned_int.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dvan-den <dvan-den@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/24 00:02:02 by dvan-den          #+#    #+#             */
+/*   Updated: 2023/10/24 00:02:02 by dvan-den         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static int	printf_unsigned_int_len(unsigned int n)
@@ -13,7 +25,6 @@ static int	printf_unsigned_int_len(unsigned int n)
 	return (i);
 }
 
-//TODO: malloc needs to be protected
 static char	*uint_to_str(unsigned int n)
 {
 	int		uint_len;

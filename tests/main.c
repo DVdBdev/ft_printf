@@ -1,16 +1,14 @@
 #include "../ft_printf.h"
 
-void    test_simple(void)
-{
-    int	x;
-	int	y;
-	x = 0;
-	y = 0;
-	printf("\n----------- TEST: simple string -----------\n\n");
-	printf("Testing: (\"\\tHello!\\n\")\n");
-	x += printf("  Or\t:\tHello!\n");
-	y += ft_printf("  Ft\t:\tHello!\n");
-	printf("Printf = %d, ft_printf = %d\n\n", x, y);
+void test_simple(void) {
+    int x, y;
+    x = 0;
+    y = 0;
+    printf("\n----------- TEST: simple string -----------\n\n");
+    printf("Testing: (%s\"\\tHello!\\n\"%s)\n", "\x1b[33m", "\x1b[0m");  // Yellow
+    x += printf("  Or\t:\tHello!\n");
+    y += ft_printf("  Ft\t:\tHello!\n");
+    printf("Printf = %s%d%s, ft_printf = %s%d%s\n\n", "\x1b[32m", x, "\x1b[0m", "\x1b[32m", y, "\x1b[0m");  // Green
 }
 
 void	test_percent(void)
