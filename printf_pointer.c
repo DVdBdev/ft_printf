@@ -41,11 +41,11 @@ int	printf_pointer(void *ptr)
 
 	ptr_val = (uintptr_t)ptr;
 	len = 0;
-	len = len + printf_string("0x");
 	if (ptr_val == 0)
-		len = len + printf_char('0');
+		return (printf_string("(nil)"));
 	else
 	{
+		len = len + printf_string("0x");
 		put_hex(ptr_val);
 		len = len + ptr_len(ptr_val);
 	}

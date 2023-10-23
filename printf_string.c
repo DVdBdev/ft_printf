@@ -4,6 +4,11 @@ int	printf_string(char *str)
 {
 	int	i;
 
+	if (str == NULL) 
+	{
+        write(1, "(null)", 6);
+        return (6);
+    }
 	i = 0;
 	while (str[i])
 	{
