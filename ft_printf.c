@@ -1,6 +1,8 @@
 #include <unistd.h>
+#include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <string.h>
 
 int     printf_char(int c)
 {
@@ -21,6 +23,37 @@ int	printf_string(char *str)
 	return (i);
 }
 
+int	printf_positive_int(int n)
+{
+	int	len;
+
+	len = 0;
+	if (n >= 10)
+		len = len + printf_positive_int(n / 10);
+	len = len + printf_char('0' + n % 10);
+	return (len);
+}
+
+int	printf_int(int n)
+{
+	int		len;
+	char	*int_min_str;
+
+	len = 0;
+	int_min_str = "-2147483648";
+	if (n == INT_MIN)
+		len = printf_string(int_min_str);
+	else
+	{
+		if (n < 0)
+		{
+			len = len + write(1, "-", 1);
+			n = -n;
+		}
+		len = len + printf_positive_int(n);
+	}
+	return (len);
+}
 
 int	printf_formats(va_list args, const char format)
 {
@@ -31,9 +64,10 @@ int	printf_formats(va_list args, const char format)
 		len = len + printf_char(va_arg(args, int));
 	else if (format == 's')
 		len = len + printf_string(va_arg(args, char *));
+	else if (format == 'd' || format == 'i')
+		len = len + printf_int(va_arg(args, int));
 	return (len);
 }
-
 
 int	ft_printf(const char *str, ...)
 {
@@ -59,11 +93,13 @@ int	ft_printf(const char *str, ...)
 	return (len);
 }
 
-int     main(void)
-{
-        int a = 'a';
-        char *str = "hey";
-	printf("HALLO IK BEN DRIES %c %s", a, str);
-        //ft_printf("HALLO IK BEN DRIES %c %c", a, b);
-        return (0);
+int main(void) {
+    
+    const char *str = "TEST: %d";
+	int s = INT_MIN;
+    int cu = ft_printf(str, s);
+	int og = printf(str, s);
+	write(1, "\n", 1);
+	printf("\n\nprintf:\t\t%d\nft_printf:\t%d\n", og, cu);
+    return 0;
 }
