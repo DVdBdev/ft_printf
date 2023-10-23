@@ -6,7 +6,7 @@
 /*   By: dvan-den <dvan-den@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 00:01:42 by dvan-den          #+#    #+#             */
-/*   Updated: 2023/10/24 00:01:42 by dvan-den         ###   ########.fr       */
+/*   Updated: 2023/10/24 00:10:30 by dvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*uint_to_hex(unsigned int n, char format)
 	else
 		hex_chars = "0123456789ABCDEF";
 	hex_len = what_hex_len(n);
-	hex_str = (char*)malloc(hex_len + 1);
+	hex_str = (char *)malloc(hex_len + 1);
 	if (!hex_str)
 		return (NULL);
 	hex_str[hex_len] = '\0';
@@ -58,7 +58,7 @@ int	printf_hex_lower(unsigned int n)
 {
 	int		len;
 	char	*str;
-	
+
 	len = 0;
 	str = uint_to_hex(n, 'x');
 	len = len + printf_string(str);
@@ -70,7 +70,7 @@ int	printf_hex_upper(unsigned int n)
 {
 	int		len;
 	char	*str;
-	
+
 	len = 0;
 	str = uint_to_hex(n, 'X');
 	len = len + printf_string(str);

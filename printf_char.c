@@ -6,14 +6,14 @@
 /*   By: dvan-den <dvan-den@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 00:01:39 by dvan-den          #+#    #+#             */
-/*   Updated: 2023/10/24 00:01:39 by dvan-den         ###   ########.fr       */
+/*   Updated: 2023/10/24 00:08:59 by dvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int     printf_char(int c)
+int	printf_char(int c)
 {
-        write(1, &c, 1);
-        return (1);
+	write(1, &c, 1);
+	return (1);
 }

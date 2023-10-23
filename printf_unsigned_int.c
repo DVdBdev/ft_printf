@@ -6,7 +6,7 @@
 /*   By: dvan-den <dvan-den@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 00:02:02 by dvan-den          #+#    #+#             */
-/*   Updated: 2023/10/24 00:02:02 by dvan-den         ###   ########.fr       */
+/*   Updated: 2023/10/24 00:11:53 by dvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	printf_unsigned_int(unsigned int n)
 	uint_len = 0;
 	if (n == 0)
 		uint_len = uint_len + write(1, "0", 1);
-	else 
+	else
 	{
 		str = uint_to_str(n);
 		uint_len = uint_len + printf_string(str);
