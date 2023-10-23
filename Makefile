@@ -1,54 +1,45 @@
-NAME	=	libftprintf.a
-INCLUDE	=	include
-SRC_DIR	=	src
-OBJ_DIR	=	obj
-CC		=	cc
-CFLAGS	=	-Wall -Werror -Wextra
-RM		=	rm -f
-AR		=	ar rcs
-OBJF	=	.cache_exists
+NAME			=	libftprintf.a
+CC				=	cc
+CFLAGS			=	-Wall -Werror -Wextra
+RM				=	rm -rf
+AR				=	ar rcs
 
-DEF_COLOR	=	\033[0;39m
-GRAY		=	\033[0;90m
-RED			=	\033[0;91m
-GREEN		=	\033[0;92m
-YELLOW		=	\033[0;93m
-BLUE		=	\033[0;94m
-MAGENTA		=	\033[0;95m
-CYAN		=	\033[0;96m
-WHITE		=	\033[0;97m
+SRC				=	ft_printf printf_char printf_hex printf_int \
+					printf_percent printf_pointer printf_string \
+					printf_unsigned_int \
 
-SRC_FILES	=	ft_printf \
-				printf_char \
-				printf_hex \
-				printf_int \
-				printf_percent \
-				printf_pointer \
-				printf_string \
-				printf_unsigned_int
+SRCS			=	$(addsuffix .c, $(SRC))
 
-SRC	=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC_FILES)))
-OBJ	=	$(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(SRC_FILES)))
+OBJ_DIR			= 	obj
+OBJS			=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
 
-.PHONY:	all clean fclean re
+COLOR_DEFAULT = \033[0m
+COLOR_GREEN   = \033[32m
+COLOR_BLUE    = \033[34m
+COLOR_CYAN    = \033[36m
 
-all:	$(NAME)
+$(OBJ_DIR)/%.o:	%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(COLOR_GREEN)Compiling: $(COLOR_CYAN)$<$(COLOR_DEFAULT)"
 
-$(NAME):	$(OBJ)
-	@$(AR) $(NAME) $(OBJ)
-	@echo "$(GREEN)ft_printf compiled!$(DEF_COLOR)"
+all: $(OBJ_DIR) $(NAME)
+	@echo "$(COLOR_GREEN)ft_printf compiled!$(COLOR_DEFAULT)"
 
-$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c | $(OBJF)
-	@echo "$(YELLOW)Compiling: $<$(DEF_COLOR)"
-	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+$(NAME): $(OBJ_DIR) $(OBJS)
+	@$(AR) $(NAME) $(OBJS)
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 clean:
-	@$(RM) -rf $(OBJ_DIR)
-	@echo "$(BLUE)ft_printf object files cleaned!$(DEF_COLOR)"
+	@$(RM) $(OBJ_DIR)
+	@echo "$(COLOR_BLUE)ft_printf object files cleaned!$(COLOR_DEFAULT)"
 
 fclean:	clean
-	@$(RM) -f $(NAME)
-	@echo "$(CYAN)ft_printf executable files cleaned!$(DEF_COLOR)"
+	@$(RM) $(NAME)
+	@echo "$(COLOR_BLUE)ft_printf executable files cleaned!$(COLOR_DEFAULT)"
 
 re:	fclean all
-	@echo "$(GREEN)Cleaned and rebuilt everything for ft_printf!$(DEF_COLOR)"
+	@echo "$(COLOR_GREEN)Cleaned and rebuilt everything for ft_printf!$(COLOR_DEFAULT)"
+
+.PHONY: all clean fclean re
