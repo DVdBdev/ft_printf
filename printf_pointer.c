@@ -12,11 +12,13 @@
 
 #include "ft_printf.h"
 
-int	ptr_len(uintptr_t n)
+static int	hex_len(unsigned long long n)
 {
-	int	len;
+	size_t	len;
 
 	len = 0;
+	if (n == 0)
+		return (1);
 	while (n != 0)
 	{
 		len++;
@@ -25,41 +27,21 @@ int	ptr_len(uintptr_t n)
 	return (len);
 }
 
-void	ft_putchar(int c)
+static void	put_hex(unsigned long long n)
 {
-	write(1, &c, 1);
-}
+	const char	*hex_chars;
 
-void	put_hex(uintptr_t n)
-{
+	hex_chars = "0123456789abcdef";
 	if (n >= 16)
-	{
 		put_hex(n / 16);
-		put_hex(n % 16);
-	}
-	else
-	{
-		if (n < 10)
-			ft_putchar(n + '0');
-		else
-			ft_putchar(n - 10 + 'a');
-	}
+	printf_char(hex_chars[n % 16]);
 }
 
-int	printf_pointer(void *ptr)
+int	printf_pointer(void	*ptr)
 {
-	uintptr_t	ptr_val;
-	int			len;
-
-	ptr_val = (uintptr_t)ptr;
-	len = 0;
-	if (ptr_val == 0)
+	if (ptr == NULL)
 		return (printf_string("(nil)"));
-	else
-	{
-		len = len + printf_string("0x");
-		put_hex(ptr_val);
-		len = len + ptr_len(ptr_val);
-	}
-	return (len);
+	printf_string("0x");
+	put_hex((unsigned long long)ptr);
+	return (hex_len((unsigned long long)ptr) + 2);
 }

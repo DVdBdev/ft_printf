@@ -36,6 +36,15 @@ static int	printf_formats(va_list args, const char format)
 	return (len);
 }
 
+int	valid_specifier(int c)
+{
+	if (c == '%' || c == 'c' || c == 's' || 
+		c == 'd' || c == 'i' || c == 'x' || 
+		c == 'X' || c == 'u' || c == 'p')
+		return (1);
+	return (0);
+}
+
 int	ft_printf(const char *str, ...)
 {
 	int		i;
@@ -47,12 +56,15 @@ int	ft_printf(const char *str, ...)
 	va_start(args, str);
 	while (str[i])
 	{
-		if (str[i] == '%')
+		if (str[i] == '%' && str[i + 1])
 		{
-			len = len + printf_formats(args, str[i + 1]);
+			if (valid_specifier(str[i + 1]))
+				len = len + printf_formats(args, str[i + 1]);
+			else
+				len = len + printf_char(str[i + 1]);
 			i++;
 		}
-		else
+		else if (str[i] != '%')
 			len = len + printf_char(str[i]);
 		i++;
 	}
