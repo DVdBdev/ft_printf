@@ -6,7 +6,7 @@
 /*   By: dvan-den <dvan-den@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 00:01:18 by dvan-den          #+#    #+#             */
-/*   Updated: 2023/10/24 00:01:25 by dvan-den         ###   ########.fr       */
+/*   Updated: 2023/11/10 10:45:11 by dvan-den         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ static int	printf_formats(va_list args, const char format)
 
 int	valid_specifier(int c)
 {
-	if (c == '%' || c == 'c' || c == 's' || 
-		c == 'd' || c == 'i' || c == 'x' || 
-		c == 'X' || c == 'u' || c == 'p')
+	if (c == '%' || c == 'c' || c == 's' || c == 'd' || c == 'i' || c == 'x'
+		|| c == 'X' || c == 'u' || c == 'p')
 		return (1);
 	return (0);
 }

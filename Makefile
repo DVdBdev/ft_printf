@@ -17,6 +17,7 @@ COLOR_DEFAULT = \033[0m
 COLOR_GREEN   = \033[32m
 COLOR_BLUE    = \033[34m
 COLOR_CYAN    = \033[36m
+COLOR_RED 	  = \033[0;31m
 
 $(OBJ_DIR)/%.o:	%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -33,11 +34,12 @@ $(OBJ_DIR):
 
 clean:
 	@$(RM) $(OBJ_DIR)
-	@echo "$(COLOR_BLUE)ft_printf object files cleaned!$(COLOR_DEFAULT)"
+	@echo "$(COLOR_RED)Removing: $(COLOR_CYAN)object files$(COLOR_DEFAULT)"
 
 fclean:	clean
 	@$(RM) $(NAME)
-	@echo "$(COLOR_BLUE)ft_printf executable files cleaned!$(COLOR_DEFAULT)"
+	@echo "$(COLOR_RED)Removing: $(COLOR_CYAN)executable files$(COLOR_DEFAULT)"
+	@echo "$(COLOR_RED)ft_printf fcleaned!$(COLOR_DEFAULT)"
 
 re:	fclean all
 	@echo "$(COLOR_GREEN)Cleaned and rebuilt everything for ft_printf!$(COLOR_DEFAULT)"
